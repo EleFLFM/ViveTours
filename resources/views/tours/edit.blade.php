@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user() && Auth::user()->hasRole('admin'))
 <div class="container">
     <h1 class="mb-4">Editar Tour: {{ $tour->name }}</h1>
 
@@ -48,4 +49,8 @@
         <a href="{{ route('tours.show', $tour) }}" class="btn btn-secondary">Cancelar</a>
     </form>
 </div>
+@else
+    <p>No tienes permiso para acceder a esta página.</p>
+@endif
+
 @endsection

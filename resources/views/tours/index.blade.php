@@ -28,6 +28,7 @@
                     <div class="card-body">
                         <h5 class="card-title">{{ $tour->name }}</h5>
                         <p class="card-text">{{ Str::limit($tour->description, 100) }}</p>
+                        <p class="card-text"><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($tour->tour_date)->format('d/m/Y') }}</p>
                         <a href="{{ route('tours.show', $tour) }}" class="btn btn-info">Ver Detalles</a>
                         @if(Auth::user() && Auth::user()->hasRole('admin'))
                             <a href="{{ route('tours.edit', $tour) }}" class="btn btn-warning">Editar</a>
