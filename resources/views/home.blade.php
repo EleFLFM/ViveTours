@@ -5,13 +5,16 @@
     @if(Auth::check())
         <h1>Bienvenido, {{ Auth::user()->name }}.</h1>
         @if(Auth::user()->hasRole('admin'))
-        <p>Esta es la sección de administración.</p>
+        
         @include('admin.index') {{-- Aquí incluye el contenido específico para el administrador --}}
-        <a href="{{ route('tours.index') }}" class="btn btn-primary">Ver Tours</a>
+      
+        
         @else
+            
             <p>Esta es la sección de cliente.</p>
             <a href="{{ route('tours.index') }}" class="btn btn-primary">Ver Tours</a>
-
+            
+            
             {{-- Aquí puedes agregar contenido específico para los clientes --}}
         @endif
     @else

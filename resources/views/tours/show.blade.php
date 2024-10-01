@@ -30,7 +30,7 @@
                 </form>
             @endif
             
-            <a href="{{ route('tours.index') }}" class="btn btn-secondary mt-3">Volver al listado</a>
+            <a href="{{ route('tours.index') }}" class="btn btn-secondary">Volver al listado</a>
         </div>
     </div>
 </div>

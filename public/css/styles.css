@@ -1,0 +1,85 @@
+/* Create Form */
+.form-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.form-control {
+    border-radius: 8px;
+    box-shadow: none;
+    border: 1px solid #ced4da;
+    transition: all 0.3s ease-in-out;
+}
+
+.form-control:focus {
+    border-color: #1d8ff2;
+    box-shadow: 0 0 8px rgba(29, 143, 242, 0.2);
+}
+
+.form-control-file {
+    margin-top: 10px;
+}
+
+.btn-gradient-primary {
+    background: linear-gradient(90deg, #1d8ff2 0%, #44cbeb 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0px 4px 15px rgba(0, 123, 255, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-gradient-primary:hover {
+    background: linear-gradient(90deg, #44cbeb 0%, #1d8ff2 100%);
+    box-shadow: 0px 6px 20px rgba(0, 123, 255, 0.4);
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+}
+
+.shadow {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.rounded {
+    border-radius: 12px;
+}
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transiciones suaves para transformaciones y sombras */
+}
+
+.card:hover {
+    transform: scale(1.05); /* Aumentar el tamaño al 105% */
+    box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Aumentar la sombra al hacer hover */
+}
+
+/* boton cancelar */
+/* Estilo del botón secundario (cancelar) con un color rojo suave */
+.btn-secondary {
+    background: linear-gradient(90deg, #861919 0%, #ef5350 100%);
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 20px;
+    border-radius: 50px;
+    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+/* Hover del botón secundario con un color rojo más oscuro */
+.btn-secondary:hover {
+    background: linear-gradient(90deg, #d32f2f 0%, #c62828 100%);
+    box-shadow: 0px 6px 20px rgba(211, 47, 47, 0.4);
+    transform: translateY(-3px);
+    transition: all 0.3s ease;
+}
+.btn i {
+    margin: auto; /* Espacio entre el icono y el texto */
+}
+
+.btn {
+    display: flex; /* Aline ar el icono y el texto en línea */
+    align-items: center; /* Centrar verticalmente */
+    justify-content: center; /* Centrar horizontalmente */
+}
