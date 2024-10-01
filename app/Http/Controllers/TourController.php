@@ -23,14 +23,12 @@ class TourController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'tour_date' => 'required|date',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $tour = new Tour();
-        $tour->name = $request->name;
-        $tour->description = $request->description;
-        $tour->tour_date = $request->tour_date;
+        $tour = new Tour($request->only(['name', 'description', 'start_date', 'end_date']));
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('tour_images', 'public');
@@ -38,6 +36,7 @@ class TourController extends Controller
         }
 
         $tour->save();
+
 
         return redirect()->route('tours.index')->with('success', 'Tour creado exitosamente.');
     }
@@ -57,16 +56,14 @@ class TourController extends Controller
         $request->validate([
             'name' => 'required|max:255',
             'description' => 'required',
-            'tour_date' => 'required|date',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after_or_equal:start_date',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $tour->name = $request->name;
-        $tour->description = $request->description;
-        $tour->tour_date = $request->tour_date;
+        $tour->fill($request->only(['name', 'description', 'start_date', 'end_date']));
 
         if ($request->hasFile('image')) {
-            // Eliminar la imagen anterior si existe
             if ($tour->image) {
                 Storage::disk('public')->delete($tour->image);
             }

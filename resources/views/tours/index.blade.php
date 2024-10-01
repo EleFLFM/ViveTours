@@ -26,7 +26,8 @@
                     <div class="card-body d-flex flex-column">
                         <h5 class="card-title text-center font-weight-bold">{{ $tour->name }}</h5>
                         <p class="card-text text-muted text-center">{{ Str::limit($tour->description, 100) }}</p>
-                        <p class="card-text text-center"><strong>Fecha:</strong> {{ \Carbon\Carbon::parse($tour->tour_date)->format('d/m/Y') }}</p>
+                        <p class="card-text text-center"><strong>Inicio:</strong> {{ \Carbon\Carbon::parse($tour->start_date)->format('d/m/Y') }}</p>
+                        <p class="card-text text-center"><strong>Fin:</strong> {{ \Carbon\Carbon::parse($tour->end_date)->format('d/m/Y') }}</p>
 
                         <div class="mt-auto text-center">
                             <a href="{{ route('tours.show', $tour) }}" class="btn btn-info mb-2 w" title="Ver Detalles" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-title="Ver Detalles">
