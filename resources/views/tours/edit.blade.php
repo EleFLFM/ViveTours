@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->hasRole('admin'))
 <div class="container">
     <h1 class="mb-4 text-center">Editar Tour</h1>
 
@@ -55,5 +56,10 @@
             <button type="submit" class="btn btn-gradient-primary px-5 py-2">Actualizar Tour</button>
         </div>
     </form>
-</div>
+</div>    
+
+@else
+    <p>No eres administrador</p>
+@endif
+
 @endsection

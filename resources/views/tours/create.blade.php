@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+
+@if(Auth::user()->hasRole('admin'))
 <div class="container">
     <h1 class="mb-4 text-center">Crear Nuevo Tour</h1>
 
@@ -51,4 +53,8 @@
         </div>
     </form>
 </div>
+@else
+    <p>No eres administrador</p>
+@endif
+
 @endsection
