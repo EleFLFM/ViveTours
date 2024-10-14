@@ -17,7 +17,7 @@
             <div class="col-md-4 mb-4">
                 <div class="card h-100 shadow-lg border-0">
                     @if($tour->image)
-                        <img src="{{ asset('storage/' . $tour->image) }}" class="card-img-top" alt="{{ $tour->name }}" style="max-height: 200px; object-fit: cover;">
+                        <img src="{{ asset('storage/' . $tour->image) }}" class="card-img-top" alt="{{ $tour->name }}" style=" object-fit: cover;">
                     @else
                         <div class="card-img-top bg-secondary text-white d-flex justify-content-center align-items-center" style="height: 200px;">
                             No Image

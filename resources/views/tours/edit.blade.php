@@ -17,13 +17,7 @@
             @enderror
         </div>
 
-        <div class="form-group mb-3">
-            <label for="description" class="form-label">Descripción</label>
-            <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="4" required>{{ old('description', $tour->description) }}</textarea>
-            @error('description')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
-        </div>
+        
 
         <div class="form-group mb-3">
             <label for="start_date" class="form-label">Fecha de Inicio</label>

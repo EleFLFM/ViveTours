@@ -23,9 +23,13 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                
+                {{-- <img src="/storage/tour_images/vivet.png" alt="" style="width: 5%"> --}}
+                <a class="navbar-brand" href="{{ url('/') }}" style="padding: inherit">
+                    <img src="/storage/tour_images/vivet.png" alt="" style="width: 5%">
                     {{ config('app.name', 'Mi Aplicación') }}
                 </a>
+                
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -33,7 +37,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
-                        <!-- Puedes agregar más elementos aquí si lo necesitas -->
+                        
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -51,6 +55,12 @@
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
                                 </li>
                             @endif
+
+                            {{-- @if (Route::has('register')) --}}
+                                <li class="nav-item">
+                                    <a class="nav-link" href=" ">Sobre Nosotro</a>
+                                </li>
+                            {{-- @endif --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -88,7 +98,7 @@
 <style>
     /* Estilos para la barra de navegación */
     .navbar {
-        background: linear-gradient(90deg, rgba(29, 143, 242, 1) 0%, rgba(68, 203, 238, 1) 100%);
+        background: linear-gradient(90deg, rgb(68, 203, 238, 1) 0%, rgba(242, 157, 29) 100%);
         border-bottom: 2px solid rgba(0, 0, 0, 0.1);
     }
 
@@ -107,6 +117,7 @@
     }
 
     .dropdown-menu {
+        
         background-color: rgba(255, 255, 255, 0.9);
     }
 
@@ -119,9 +130,11 @@
     }
 
     main {
-        background-color: #f8f9fa;
+
+        background-image: url(/storage/tour_images/2.jpg)
+        /* background-color: rgba(240, 0, 0, 0.9); */
         padding: 20px;
-        border-radius: 8px;
+        /* border-radius: 8px; */
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 </style>
