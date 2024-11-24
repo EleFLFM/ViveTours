@@ -6,7 +6,7 @@ use App\Http\Controllers\TourController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-
+// Ruta de inicio
 Route::get('/', function () {
     return view('home');
 });
@@ -21,6 +21,12 @@ Route::middleware(['auth'])->group(function () {
 
     // Ruta para el panel de administración (solo accesible para usuarios con rol de admin)
     Route::get('admin', [AdminController::class, 'index'])->name('admin')->middleware('role:admin');
+
+    // Ruta para el dashboard (solo accesible para usuarios con rol de admin)
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('admin/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+    });
+    
 });
 
 // Rutas de autenticación

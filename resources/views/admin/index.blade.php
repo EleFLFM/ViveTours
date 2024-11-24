@@ -28,7 +28,7 @@
                 <div class="card-body text-center">
                     <i class="fas fa-chart-line fa-3x text-success mb-3"></i>
                     <p class="card-text">Obtén una visión general de las estadísticas y el rendimiento de tu negocio.</p>
-                    <a href="{{-- route('dashboard') --}}" class="btn btn-success btn-block mt-3">Ver Dashboard</a>
+                    <a href="{{ route('dashboard') }}" class="btn btn-success btn-block mt-3">Ver Dashboard</a>
                 </div>
             </div>
         </div>

@@ -10,9 +10,11 @@
             <p>Bienvenido, administrador.</p>
             @include('admin.index') {{-- Aquí puedes agregar contenido específico para el administrador --}}
         @else
-            <p>Esta es la sección de cliente.</p>
-            {{-- Aquí puedes agregar contenido específico para los clientes --}}
-        @endif
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Bienvenido</h4>
+        <p>Descubre los mejores tours disponibles y reserva el que más te guste.</p>
+    </div>
+@endif
     @else
         <h1>Bienvenido, visitante.</h1>
         <p>Por favor, <a href="{{ route('login') }}">inicie sesión</a>.</p>

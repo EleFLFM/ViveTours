@@ -3,20 +3,15 @@
 @section('content')
 <div class="container" >
     @if(Auth::check())
-        <h1>Bienvenido, {{ Auth::user()->name }}.</h1>
+        {{-- <h1>Bienvenido, {{ Auth::user()->name }}.</h1> --}}
         @if(Auth::user()->hasRole('admin'))
         
         @include('admin.index') {{-- Aquí incluye el contenido específico para el administrador --}}
       
         
         @else
-            
-            <p>Esta es la sección de cliente.</p>
-            <a href="{{ route('tours.index') }}" class="btn btn-primary">Ver Tours</a>
-            
-            
-            {{-- Aquí puedes agregar contenido específico para los clientes --}}
-        @endif
+        @include('partials.welcome-content')
+    @endif
     @else
         <div class="content-wrapper" style="    
             padding-top: calc(39vmax / 10); padding-bottom: calc(39vmax / 10); ">
