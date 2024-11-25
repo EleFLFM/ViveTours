@@ -62,7 +62,7 @@
 
 <style>
    .btn-gradient-primary {
-    background: linear-gradient(90deg, rgba(29, 143, 242, 1) 0%, rgba(68, 203, 238, 1) 100%);
+    background: linear-gradient(90deg, rgba(29, 143, 242, 1) 0%, rgb(243, 142, 48) 100%);
     border: none;
     color: white;
     padding: 10px;
@@ -72,7 +72,7 @@
 }
 
 .btn-gradient-primary:hover {
-    background: linear-gradient(90deg, rgba(68, 203, 238, 1) 0%, rgba(29, 143, 242, 1) 100%);
+    background: linear-gradient(90deg, rgba(243, 142, 48) 0%, rgba(29, 143, 242, 1) 100%);
     color: white;
     transform: scale(1.05); /* Escalado en hover */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra en hover */

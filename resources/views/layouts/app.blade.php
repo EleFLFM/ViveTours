@@ -29,7 +29,7 @@
                 
                 {{-- <img src="/storage/tour_images/vivet.png" alt="" style="width: 5%"> --}}
                 <a class="navbar-brand" href="{{ url('/') }}" style="padding: inherit">
-                    <img src="/storage/tour_images/vivet.png" alt="" style="width: 5%">
+                    {{-- <img src="/storage/tour_images/vivet.png" alt="" style="width: 5%"> --}}
                     {{ config('app.name', 'Mi Aplicación') }}
                 </a>
                 
@@ -140,4 +140,89 @@
         /* border-radius: 8px; */
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
+    /* Estilos para los botones de navegación */
+.navbar-nav .nav-item .nav-link {
+    padding: 0.5rem 1.2rem;
+    margin: 0 0.3rem;
+    border-radius: 20px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Estilo para Login */
+.navbar-nav .nav-item:nth-child(1) .nav-link {
+    background-color: rgba(255, 255, 255, 0.2);
+    /* border: 2px solid white; */
+    color: white;
+}
+
+.navbar-nav .nav-item:nth-child(1) .nav-link:hover {
+    background-color: white;
+    color: rgb(68, 203, 238);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para Register */
+.navbar-nav .nav-item:nth-child(2) .nav-link {
+    background-color: rgba(255, 255, 255, 0.2);
+
+    color: white;
+    /* border: 2px solid transparent; */
+}
+
+.navbar-nav .nav-item:nth-child(2) .nav-link:hover {
+    background-color: rgba(242, 157, 29, 0.9);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilo para Sobre Nosotros */
+.navbar-nav .nav-item:nth-child(3) .nav-link {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.3) 100%);
+    /* border: 2px solid rgba(255, 255, 255, 0.6); */
+    color: white;
+}
+
+.navbar-nav .nav-item:nth-child(3) .nav-link:hover {
+    background: white;
+    color: rgba(242, 157, 29, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Efecto de brillo al hover para todos los botones */
+.navbar-nav .nav-item .nav-link::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        to bottom right,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.3) 50%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    transform: rotate(45deg);
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.navbar-nav .nav-item .nav-link:hover::after {
+    opacity: 1;
+    transform: rotate(45deg) translate(50%, 50%);
+}
+
+/* Ajuste responsive */
+@media (max-width: 768px) {
+    .navbar-nav .nav-item .nav-link {
+        margin: 0.5rem 1rem;
+        text-align: center;
+    }
+}
 </style>

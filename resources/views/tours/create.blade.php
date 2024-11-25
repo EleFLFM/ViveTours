@@ -54,7 +54,7 @@
     </form>
 </div>
 @else
-    <p>No eres administrador</p>
+    <h1 style="padding-left: 40px">NO TIENES PERMISO PARA ESTA SECCION</h1>
 @endif
 
 @endsection

@@ -1,176 +1,286 @@
 @extends('layouts.app')
 
+<style>
+    :root {
+        --primary: #00B4DB;
+        --primary-dark: #0083B0;
+        --secondary: #e09c42;
+        --secondary-dark: #ee8b52;
+        --accent: #FFD93D;
+        --light: #F8F9FA;
+        --dark: #2D3436;
+    }
+
+    .hero-section {
+        min-height: 100vh;
+        background: linear-gradient(135deg, rgba(0,180,219,0.05) 0%, rgba(224,156,66,0.05) 100%);
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-content {
+        padding: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+        padding-top: calc(39vmax / 10);
+        padding-bottom: calc(39vmax / 10);
+    }
+
+    .animated-title {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease forwards;
+        text-align: center;
+    }
+
+    .animated-subtitle {
+        font-size: 1.5rem;
+        color: var(--dark);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease forwards 0.3s;
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        padding: 2rem;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease forwards 0.6s;
+    }
+
+    .feature-card {
+        background: white;
+        border-radius: 20px;
+        padding: 2rem;
+        transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
+        border: none;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        cursor: pointer;
+        transform-style: preserve-3d;
+        perspective: 1000px;
+    }
+
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        opacity: 0;
+        transition: all 0.5s ease;
+        z-index: 1;
+        transform: translateZ(-1px);
+    }
+
+    .feature-card:hover {
+        transform: translateY(-15px) rotateX(5deg);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    }
+
+    .feature-card:hover::before {
+        opacity: 0.1;
+    }
+
+    .gradient-text {
+        background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        display: inline-block;
+    }
+
+    .accent-text {
+        color: #fa9805;
+        font-weight: bold;
+    }
+
+    .floating-shapes {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 1;
+    }
+
+    .shape {
+        position: absolute;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+        opacity: 0.1;
+        animation: float 20s infinite;
+    }
+
+    .auth-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-top: 2rem;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 1s ease forwards 0.9s;
+    }
+
+    .auth-button {
+        background: linear-gradient(45deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .auth-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        color: white;
+        text-decoration: none;
+    }
+
+    @keyframes float {
+        0%, 100% {
+            transform: translate(0, 0) rotate(0deg);
+        }
+        25% {
+            transform: translate(50px, -50px) rotate(90deg);
+        }
+        50% {
+            transform: translate(0, -100px) rotate(180deg);
+        }
+        75% {
+            transform: translate(-50px, -50px) rotate(270deg);
+        }
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @media (max-width: 768px) {
+        .animated-title {
+            font-size: 2.5rem;
+        }
+        
+        .animated-subtitle {
+            font-size: 1.2rem;
+        }
+        
+        .features-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .auth-buttons {
+            flex-direction: column;
+            padding: 0 2rem;
+        }
+
+        .auth-button {
+            width: 100%;
+            text-align: center;
+        }
+    }
+</style>
+
 @section('content')
-<div class="container" >
+<div class="container">
     @if(Auth::check())
-        {{-- <h1>Bienvenido, {{ Auth::user()->name }}.</h1> --}}
         @if(Auth::user()->hasRole('admin'))
-        
-        @include('admin.index') {{-- Aquí incluye el contenido específico para el administrador --}}
-      
-        
+            @include('admin.index')
         @else
-        @include('partials.welcome-content')
-    @endif
+            @include('partials.welcome-content')
+        @endif
     @else
-        <div class="content-wrapper" style="    
-            padding-top: calc(39vmax / 10); padding-bottom: calc(39vmax / 10); ">
-        <div class="content">
-        
-        <div data-fluid-engine="true" >
-            <style> 
-                .fe-66e0dd1d19bbb02a5d360a4a {
-                --grid-gutter: calc(var(--sqs-mobile-site-gutter, 6vw) - 15.0px);
-                --cell-max-width: calc( ( var(--sqs-site-max-width, 1500px) - (15.0px * (8 - 1)) ) / 8 );
-                display: grid;
-                position: relative;
-                grid-area: 1/1/-1/-1;
-                grid-template-rows: repeat(15,minmax(24px, auto));
-                grid-template-columns:
-                minmax(var(--grid-gutter), 1fr)
-                repeat(8, minmax(0, var(--cell-max-width)))
-                minmax(var(--grid-gutter), 1fr);
-                row-gap: 7.0px;
-                column-gap: 15.0px;
-                }
-                @media (min-width: 768px) {
-                .background-width--inset .fe-66e0dd1d19bbb02a5d360a4a 
-                {
-                    --inset-padding: calc(var(--sqs-site-gutter) * 2);
-                }
-                .fe-66e0dd1d19bbb02a5d360a4a {
-                    --grid-gutter: calc(var(--sqs-site-gutter, 4vw) - 15.0px);
-                    --cell-max-width: calc( ( var(--sqs-site-max-width, 1500px) - (15.0px * (24 - 1)) ) / 24 );
-                    --inset-padding: 0vw;
-                    --row-height-scaling-factor: 0.0215;
-                    --container-width: min(var(--sqs-site-max-width, 1500px), calc(100vw - var(--sqs-site-gutter, 4vw) * 2 - var(--inset-padding) ));
-                    grid-template-rows: repeat(10,minmax(calc(var(--container-width) * var(--row-height-scaling-factor)), auto));
-                    grid-template-columns:
-                    minmax(var(--grid-gutter), 1fr)
-                    repeat(24, minmax(0, var(--cell-max-width)))
-                    minmax(var(--grid-gutter), 1fr);
-                    }
-                }
-                .fe-block-71914a5ad7e2b12e7dcf {
-                    grid-area: 2/2/10/10;
-                    z-index: 3;
-                    @media (max-width: 767px) 
-                }
-                .fe-block-71914a5ad7e2b12e7dcf .sqs-block {
-                    justify-content: center;
-                }
-                .fe-block-71914a5ad7e2b12e7dcf .sqs-block-alignment-wrapper {
-                    align-items: center;
-                }
-                @media (min-width: 768px) {
-                    .fe-block-71914a5ad7e2b12e7dcf {
-                        grid-area: 2/6/7/22;
-                        z-index: 3;   
-                    }
-                    .fe-block-71914a5ad7e2b12e7dcf .sqs-block {
-                        justify-content: flex-start;
-                    }
-                    .fe-block-71914a5ad7e2b12e7dcf .sqs-block-alignment-wrapper {
-                        align-items: flex-start;
-                    }
-                }
-                .fe-block-5156581b7b2618b30e49 {
-                    grid-area: 10/2/14/10;
-                    z-index: 4;
-                    @media (max-width: 767px)
-                }
-                .fe-block-5156581b7b2618b30e49 .sqs-block {
-                    justify-content: center;
-                }
-                .fe-block-5156581b7b2618b30e49 .sqs-block-alignment-wrapper {
-                    align-items: center;
-                }
-                @media (min-width: 768px) {
-                    .fe-block-5156581b7b2618b30e49 {
-                        grid-area: 7/9/9/19;
-                        z-index: 4;
-                    }
-                    .fe-block-5156581b7b2618b30e49 .sqs-block {
-                        justify-content: flex-start;
-                    }
-                    .fe-block-5156581b7b2618b30e49 .sqs-block-alignment-wrapper {
-                        align-items: flex-start;
-                    }
-                }
-                .fe-block-2830134c80dc3f334fa2 {
-                    grid-area: 15/2/16/10;
-                    z-index: 5;
-                    @media (max-width: 767px)
-                }
-                .fe-block-2830134c80dc3f334fa2 .sqs-block {
-                    justify-content: flex-start;
-                }
-                .fe-block-2830134c80dc3f334fa2 .sqs-block-alignment-wrapper {
-                    align-items: flex-start;
-                }
-                @media (min-width: 768px) {
-                    .fe-block-2830134c80dc3f334fa2 {
-                        grid-area: 10/10/11/18;
-                        z-index: 5;
-                    }
-                    .fe-block-2830134c80dc3f334fa2 .sqs-block {
-                        justify-content: flex-end;
-                    }
-                    .fe-block-2830134c80dc3f334fa2 .sqs-block-alignment-wrapper {
-                        align-items: flex-end;
-                    }
-                }
-            </style>
-            <div class="fluid-engine fe-66e0dd1d19bbb02a5d360a4a" >
-                <div class="fe-block fe-block-71914a5ad7e2b12e7dcf" style="mix-blend-mode: normal;">
-                    <div class="sqs-block html-block sqs-block-html" 
-                    data-blend-mode="NORMAL" 
-                    data-block-type="2" 
-                    data-border-radii="{&quot;topLeft&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;topRight&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;bottomLeft&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;bottomRight&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0}}" 
-                    id="block-71914a5ad7e2b12e7dcf">
-                    <div class="sqs-block-content">
-                        <div class="sqs-html-content">
-                            <h1 style="text-align: center; white-space: pre-wrap; transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.5s;"" class="preFlex flexIn"><span class="sqsrte-text-color--black">Bienvenid@s, a  <br> </span><span class="sqsrte-text-color--darkAccent" style="color: rgb(250, 152, 5)"><strong>Vive Tours.</strong></span></h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="fe-block fe-block-5156581b7b2618b30e49" style="mix-blend-mode: normal;">
-                <div class="sqs-block html-block sqs-block-html" 
-                data-blend-mode="NORMAL" 
-                data-block-type="2" 
-                data-border-radii="{&quot;topLeft&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;topRight&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;bottomLeft&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;bottomRight&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0}}" 
-                id="block-5156581b7b2618b30e49">
-                <div class="sqs-block-content">
-                    <div class="sqs-html-content">
-                        <p style="text-align: center; white-space: pre-wrap; transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.5s;" 
-                        class="sqsrte-large preFlex flexIn">El destino de tus sueños, al alacance de tus manos.
-                        </p>
-                    </div>
-                </div>
+        <div class="hero-section">
+            <div class="floating-shapes">
+                @for ($i = 1; $i <= 5; $i++)
+                    <div class="shape" style="
+                        width: {{ rand(50, 200) }}px;
+                        height: {{ rand(50, 200) }}px;
+                        left: {{ rand(0, 100) }}%;
+                        top: {{ rand(0, 100) }}%;
+                        animation-delay: {{ $i * 0.5 }}s;
+                    "></div>
+                @endfor
             </div>
             
-        </div>
-        {{-- <div class="fe-block fe-block-2830134c80dc3f334fa2" style="mix-blend-mode: normal;">
-            <div class="sqs-block html-block sqs-block-html" 
-                data-blend-mode="NORMAL" 
-                data-block-type="2" 
-                data-border-radii="{&quot;topLeft&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;topRight&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;bottomLeft&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0},&quot;bottomRight&quot;:{&quot;unit&quot;:&quot;px&quot;,&quot;value&quot;:0.0}}" 
-                id="block-2830134c80dc3f334fa2">
-                <div class="sqs-block-content">
-                    <div class="sqs-html-content">
-                        <p style="text-align: center; white-space: pre-wrap; transition-timing-function: cubic-bezier(0.19, 1, 0.22, 1); transition-duration: 0.5s;" class="preFlex flexIn"> <span class="sqsrte-text-color--custom" style="color: rgb(0, 0, 0)">SCROLL ↓</span></p>
+            <div class="hero-content">
+                <h1 class="animated-title">
+                    Bienvenid@s a <br>
+                    <span class="accent-text">Vive Tours</span>
+                </h1>
+                
+                <p class="animated-subtitle">
+                    El destino de tus sueños, al alcance de tus manos
+                </p>
+
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <h3 class="gradient-text">Destinos Únicos</h3>
+                        <p>Explora lugares extraordinarios y crea memorias inolvidables en cada rincón del mundo.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="gradient-text">Experiencias Premium</h3>
+                        <p>Servicio personalizado y atención de primera clase para hacer tu viaje excepcional.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <h3 class="gradient-text">Momentos Mágicos</h3>
+                        <p>Vive momentos únicos con nuestros tours diseñados especialmente para ti.</p>
                     </div>
                 </div>
+
+                <div class="auth-buttons">
+                    <a href="{{ route('login') }}" class="auth-button">Iniciar Sesión</a>
+                    <a href="{{ route('register') }}" class="auth-button">Registrarse</a>
+                </div>
             </div>
-        </div> --}}
-    </div>
-<div>
-
-    
-  
-        {{-- <p>Por favor, <a href="{{ route('login') }}">inicie sesión</a> o <a href="{{ route('register') }}">regístrese</a>.</p> --}}
+        </div>
     @endif
-
 </div>
 @endsection
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.feature-card');
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {
+        threshold: 0.1
+    });
+    
+    cards.forEach(card => {
+        observer.observe(card);
+    });
+});
+</script>
